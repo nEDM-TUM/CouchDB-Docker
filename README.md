@@ -1,7 +1,7 @@
 CouchDB-Docker
 ==============
 
-Docker for CouchDB servers in the nEDM experiment
+Docker for CouchDB servers in the nEDM experiment.
 
 ## Information
 
