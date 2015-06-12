@@ -30,14 +30,14 @@ server:
 If you wish to run the alarm daemon, change `alarm_daemon:disabled` to be
 `false` in the configuration.  Other configuration options:
 
-```json
+```javascript
 {
-  'email_agent' : 'name.of.smtp.server', # name of SMTP server to send
-                                         # notification emails
-  'emails' : ['email@host.com', 'emailtwo@host.com'], # list of email addresses
-													  # that receive
-													  # notification
-  'disabled' : true # don't run on this server
+  email_agent : 'name.of.smtp.server', // name of SMTP server to send
+                                       // notification emails
+  emails : ['email@host.com', 'emailtwo@host.com'], // list of email addresses
+													// that receive
+													// notification
+  disabled : true // don't run on this server
 }
 ```
 
@@ -47,11 +47,11 @@ This runs to update views as well as aggregates changes from `nedm/` databases
 
 Options include:
 
-```json
+```javascript
 {
-  'write_aggregate' : false, # Run aggregation (set to true to do this)
-  'checked_types'   : ['data', 'heartbeat'], # Types of documents that are
-											 # aggregated into the aggregate db
+  write_aggregate : false, // Run aggregation (set to true to do this)
+  checked_types   : ['data', 'heartbeat'], // Types of documents that are
+										   // aggregated into the aggregate db
 }
 ```
 
