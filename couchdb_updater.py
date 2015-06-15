@@ -12,7 +12,7 @@ import hashlib
 _ignored_dbs = [ "nedm%2Faggregate" ]
 _handled_dbs = {}
 _max_updates = 100
-_daemon_user = "updater_daemon"
+_daemon_user = "aggregate_user"
 _private_key = "@SECRETREPLACE@"
 _config = {
   "write_aggregate" : False,
