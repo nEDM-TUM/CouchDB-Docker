@@ -7,6 +7,7 @@ from datetime import datetime as _dt
 import threading as _th
 import hmac
 import hashlib
+import traceback
 
 # global variables
 _ignored_dbs = [ "nedm%2Faggregate" ]
@@ -84,19 +85,24 @@ def _post_doc_to_aggregate(doc):
     return db.design("aggregate").put("_update/aggregate/" + doc["id"], params=doc).result()
 
 def get_most_recent_docs(db_name):
-    db = _get_authentication("normal")[db_name]
-
-    checked_types = _config["checked_types"]
-
-    rec_list = [(t, db.design('document_type').view('document_type').get(
-                   params=dict(limit=1,reduce=False,endkey=[t], startkey=[t,{}], descending=True)).result().json()['rows'])
-                 for t in checked_types
-               ]
-    for t, r in rec_list:
-        if len(r) == 0: continue
-        doc = dict(id=db_name + ":" + str(t), refid=r[0]['id'],
-               timestamp=_dt(*r[0]["key"][1:]).strftime("%a, %d %b %Y %H:%M:%S GMT"))
-        _post_doc_to_aggregate(doc)
+    try:
+        db = _get_authentication("normal")[db_name]
+        
+        checked_types = _config["checked_types"]
+        
+        rec_list = [(t, db.design('document_type').view('document_type').get(
+                       params=dict(limit=1,reduce=False,endkey=[t], startkey=[t,{}], descending=True)).result().json()['rows'])
+                     for t in checked_types
+                   ]
+        for t, r in rec_list:
+            if len(r) == 0: continue
+            # Months in JS begin with 0, in python with 1!
+            r[0]["key"][2] += 1
+            doc = dict(id=db_name + ":" + str(t), refid=r[0]['id'],
+                   timestamp=_dt(*r[0]["key"][1:]).strftime("%a, %d %b %Y %H:%M:%S GMT"))
+            _post_doc_to_aggregate(doc)
+    except:
+        error("Error while posting to aggregate DB ({})".format(traceback.format_exc()))
 
 def listen(reg_exp):
     """
