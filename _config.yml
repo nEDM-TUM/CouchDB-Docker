@@ -1,0 +1,7 @@
+fierlingerwiki: https://fierlinger.wiki.tum.de/Administration+Page
+baseurl: /CouchDB-Docker
+usertitle: CouchDB
+highlighter: pygments
+collections:
+  subsystems:
+    output: true
