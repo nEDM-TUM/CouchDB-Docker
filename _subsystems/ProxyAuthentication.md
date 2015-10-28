@@ -18,15 +18,15 @@ aggregate and update daemons) as well as the [File Server]({{ site.url }}/FileSe
 The relevant settings are:
 
 {% highlight ini %}
-...
+
 [httpd]
 authentication_handlers = ..., {couch_httpd_auth, proxy_authentication_handler},...
-...
+
 
 [couch_httpd_auth]
 secret = @SECRETREPLACE@
 proxy_use_secret = true
-...
+
 {% endhighlight %} 
 `secret` is randomly generated and only available for the local container and
 other connecting containers.
