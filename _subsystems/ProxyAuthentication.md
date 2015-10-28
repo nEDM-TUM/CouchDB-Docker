@@ -11,8 +11,7 @@ authentication](http://docs.couchdb.org/en/1.6.1/api/server/authn.html#proxy-aut
 which enables another server to provide the necessary authentication
 information.  In this Docker container, both proxy and 'normal' authentication
 are enabled.  Proxy authentication is only used by internal daemons (e.g. the
-aggregate and update daemons) as well as the [File Server]({{ site.url
-}}/FileServer-Docker) for providing privileged access.
+aggregate and update daemons) as well as the [File Server]({{ site.url }}/FileServer-Docker) for providing privileged access.
 
 ### Settings in `local.ini` 
 
